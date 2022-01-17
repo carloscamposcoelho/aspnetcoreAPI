@@ -4,6 +4,7 @@ using AspnetcoreAPI.Data;
 using AspnetcoreAPI.Dto;
 using AspnetcoreAPI.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspnetcoreAPI.Controllers
@@ -68,10 +69,36 @@ namespace AspnetcoreAPI.Controllers
             var commandFromRepo = _repository.GetCommandById(id);
             if (commandFromRepo == null)
             {
-                return NotFound();                
+                return NotFound();
             }
 
-            _mapper.Map(commandDtoUpdate,commandFromRepo);
+            _mapper.Map(commandDtoUpdate, commandFromRepo);
+
+            _repository.UpdateCommand(commandFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/commands/{id}
+        [HttpPatch("{id}")]
+        public ActionResult UpdatePatch(int id, JsonPatchDocument<CommandDtoUpdate> patchDoc)
+        {
+            var commandFromRepo = _repository.GetCommandById(id);
+            if (commandFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var commandToPatch = _mapper.Map<CommandDtoUpdate>(commandFromRepo);
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+
+            if (!TryValidateModel(commandToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(commandToPatch, commandFromRepo);
 
             _repository.UpdateCommand(commandFromRepo);
             _repository.SaveChanges();
