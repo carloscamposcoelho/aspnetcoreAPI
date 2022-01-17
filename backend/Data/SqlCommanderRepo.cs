@@ -37,6 +37,11 @@ namespace AspnetcoreAPI.Data
         {
             //Do nothing. Don't forget to save changes!
         }
+
+        public void DeleteCommand(Command cmd)
+        {
+            _context.Commands.Remove(cmd);
+        }
     }
 
 }

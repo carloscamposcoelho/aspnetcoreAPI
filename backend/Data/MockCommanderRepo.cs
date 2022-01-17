@@ -13,6 +13,11 @@ namespace AspnetcoreAPI.Data
             cmd.Id = id;
         }
 
+        public void DeleteCommand(Command cmd)
+        {
+            //Do nothing
+        }
+
         public IEnumerable<Command> GetAllCommands()
         {
             return new List<Command>()

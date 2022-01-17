@@ -106,6 +106,20 @@ namespace AspnetcoreAPI.Controllers
             return NoContent();
         }
 
-    }
+        //DELETE api/commands/{id}
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var commandFromRepo = _repository.GetCommandById(id);
+            if (commandFromRepo == null)
+            {
+                return NotFound();
+            }
 
+            _repository.DeleteCommand(commandFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+    }
 }
