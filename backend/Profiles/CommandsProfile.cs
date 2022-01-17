@@ -11,6 +11,7 @@ namespace AspnetcoreAPI.Profiles
             //source -> target
             CreateMap<Command, CommandDtoRead>();
             CreateMap<CommandDtoCreate, Command>();
+            CreateMap<CommandDtoUpdate, Command>();
         }
 
     }

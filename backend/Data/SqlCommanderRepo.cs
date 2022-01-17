@@ -13,6 +13,11 @@ namespace AspnetcoreAPI.Data
             _context = context;
         }
 
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() > 0);
+        }
+
         public void CreateCommand(Command cmd)
         {
             _context.Commands.Add(cmd);
@@ -28,9 +33,9 @@ namespace AspnetcoreAPI.Data
             return _context.Commands.FirstOrDefault(c => c.Id == id);
         }
 
-        public bool SaveChanges()
+        public void UpdateCommand(Command cmd)
         {
-            return (_context.SaveChanges() > 0);
+            //Do nothing. Don't forget to save changes!
         }
     }
 

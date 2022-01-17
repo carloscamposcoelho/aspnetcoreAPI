@@ -61,6 +61,24 @@ namespace AspnetcoreAPI.Controllers
             return CreatedAtRoute(nameof(Get), new { id = commandDtoRead.Id }, commandDtoRead);
         }
 
+        //PUT api/commands/{id}
+        [HttpPut("{id}")]
+        public ActionResult Update(int id, CommandDtoUpdate commandDtoUpdate)
+        {
+            var commandFromRepo = _repository.GetCommandById(id);
+            if (commandFromRepo == null)
+            {
+                return NotFound();                
+            }
+
+            _mapper.Map(commandDtoUpdate,commandFromRepo);
+
+            _repository.UpdateCommand(commandFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
     }
 
 }

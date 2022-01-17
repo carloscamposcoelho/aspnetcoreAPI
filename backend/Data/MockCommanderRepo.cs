@@ -32,5 +32,10 @@ namespace AspnetcoreAPI.Data
         {
             return true;
         }
+
+        public void UpdateCommand(Command cmd)
+        {
+            //Do nothing
+        }
     }
 }
