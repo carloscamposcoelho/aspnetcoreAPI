@@ -24,27 +24,27 @@ namespace AspnetcoreAPI.Controllers
 
         //GET api/commands
         [HttpGet]
-        public ActionResult<IEnumerable<CommandDtoRead>> GetAll()
+        public ActionResult<IEnumerable<CommandReadDto>> GetAll()
         {
             var commands = _repository.GetAllCommands();
-            return Ok(_mapper.Map<IEnumerable<CommandDtoRead>>(commands));
+            return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commands));
         }
 
         //GET api/commands/{id}
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult<CommandDtoRead> Get(int id)
+        public ActionResult<CommandReadDto> Get(int id)
         {
             var command = _repository.GetCommandById(id);
             if (command != null)
             {
-                return Ok(_mapper.Map<CommandDtoRead>(command));
+                return Ok(_mapper.Map<CommandReadDto>(command));
             }
             return NotFound();
         }
 
         //POST api/commands
         [HttpPost]
-        public ActionResult<CommandDtoRead> Create(CommandDtoCreate commandDtoCreate)
+        public ActionResult<CommandReadDto> Create(CommandCreateDto commandDtoCreate)
         {
             if (commandDtoCreate == null)
             {
@@ -56,7 +56,7 @@ namespace AspnetcoreAPI.Controllers
             _repository.CreateCommand(commandModel);
             _repository.SaveChanges();
 
-            var commandDtoRead = _mapper.Map<CommandDtoRead>(commandModel);
+            var commandDtoRead = _mapper.Map<CommandReadDto>(commandModel);
 
             //returns a 201 HttpStatusCode with the header Location containing the url to the resource created
             return CreatedAtRoute(nameof(Get), new { id = commandDtoRead.Id }, commandDtoRead);
@@ -64,7 +64,7 @@ namespace AspnetcoreAPI.Controllers
 
         //PUT api/commands/{id}
         [HttpPut("{id}")]
-        public ActionResult Update(int id, CommandDtoUpdate commandDtoUpdate)
+        public ActionResult Update(int id, CommandUpdateDto commandDtoUpdate)
         {
             var commandFromRepo = _repository.GetCommandById(id);
             if (commandFromRepo == null)
@@ -82,7 +82,7 @@ namespace AspnetcoreAPI.Controllers
 
         //PATCH api/commands/{id}
         [HttpPatch("{id}")]
-        public ActionResult UpdatePatch(int id, JsonPatchDocument<CommandDtoUpdate> patchDoc)
+        public ActionResult UpdatePatch(int id, JsonPatchDocument<CommandUpdateDto> patchDoc)
         {
             var commandFromRepo = _repository.GetCommandById(id);
             if (commandFromRepo == null)
@@ -90,7 +90,7 @@ namespace AspnetcoreAPI.Controllers
                 return NotFound();
             }
 
-            var commandToPatch = _mapper.Map<CommandDtoUpdate>(commandFromRepo);
+            var commandToPatch = _mapper.Map<CommandUpdateDto>(commandFromRepo);
             patchDoc.ApplyTo(commandToPatch, ModelState);
 
             if (!TryValidateModel(commandToPatch))

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AspnetcoreAPI.Dto
 {
-    public class CommandDtoCreate
+    public class CommandCreateDto
     {
         [Required]
         [MaxLength(250)]

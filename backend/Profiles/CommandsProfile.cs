@@ -9,10 +9,10 @@ namespace AspnetcoreAPI.Profiles
         public CommandsProfile()
         {
             //source -> target
-            CreateMap<Command, CommandDtoRead>();
-            CreateMap<CommandDtoCreate, Command>();
-            CreateMap<CommandDtoUpdate, Command>();
-            CreateMap<Command, CommandDtoUpdate>();
+            CreateMap<Command, CommandReadDto>();
+            CreateMap<CommandCreateDto, Command>();
+            CreateMap<CommandUpdateDto, Command>();
+            CreateMap<Command, CommandUpdateDto>();
         }
 
     }
