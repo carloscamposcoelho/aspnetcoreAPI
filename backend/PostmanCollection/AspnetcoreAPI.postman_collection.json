@@ -1,0 +1,99 @@
+{
+	"variables": [],
+	"info": {
+		"name": "AspnetcoreAPI",
+		"_postman_id": "e0a7c338-7aad-3a24-aef0-04eba085108a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Commands",
+			"request": {
+				"url": "http://localhost:5000/api/Commands",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/commands",
+			"request": {
+				"url": "http://localhost:5000/api/commands",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"howTo\": \"Create React App\",\n    \"line\": \"npx create-react-app my-app\",\n    \"platform\": \"NodeJS\" \n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/commands/4",
+			"request": {
+				"url": "http://localhost:5000/api/commands/6",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"howTo\": \"Install dotnet EF tools\",\n    \"line\": \"dotnet tool install --global dotnet-ef\",\n    \"platform\": \"EF Core\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/commands/3",
+			"request": {
+				"url": "http://localhost:5000/api/commands/3",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  { \"op\": \"replace\", \"path\": \"/platform\", \"value\": \"Node JS\" },\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/commands/5",
+			"request": {
+				"url": "http://localhost:5000/api/commands/5",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
